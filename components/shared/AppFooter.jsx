@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const AppFooter = () => {
 	return (
@@ -9,14 +9,11 @@ const AppFooter = () => {
 				</p>
 				<div className="flex justify-center gap-6 mt-4 md:mt-0">
 					{/* Social links */}
-					<a href="#" className="text-slate-400 hover:text-primary-400 transition-colors">
+					<a href="https://github.com/kenwayhappi" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary-400 transition-colors">
 						<FaGithub size={20} />
 					</a>
-					<a href="#" className="text-slate-400 hover:text-primary-400 transition-colors">
+					<a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary-400 transition-colors">
 						<FaLinkedin size={20} />
-					</a>
-					<a href="#" className="text-slate-400 hover:text-primary-400 transition-colors">
-						<FaTwitter size={20} />
 					</a>
 				</div>
 			</div>
