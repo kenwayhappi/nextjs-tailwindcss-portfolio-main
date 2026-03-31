@@ -40,9 +40,9 @@ const Hero = () => {
 					<h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 text-white">
 						Happi <span className="text-primary-400">Mathis</span>
 					</h1>
-					<h2 className="text-2xl md:text-4xl text-slate-300 font-medium mb-6 h-10">
+					<h2 className="text-2xl md:text-4xl text-slate-300 font-medium mb-6 min-h-[80px] md:min-h-[48px] leading-snug">
 						{texts[textIndex].substring(0, subIndex)}
-						<span className="animate-ping inline-block w-[3px] h-8 bg-primary-400 ml-1 translate-y-1"></span>
+						<span className="animate-ping inline-block w-[3px] h-8 md:h-10 bg-primary-400 ml-1 translate-y-1"></span>
 					</h2>
 					<p className="text-lg text-slate-400 mb-8 max-w-xl leading-relaxed">
 						Créateur de solutions web & mobiles passionné. Je transforme vos idées en réalité avec des technologies modernes telles que Next.js, Laravel et Flutter.
