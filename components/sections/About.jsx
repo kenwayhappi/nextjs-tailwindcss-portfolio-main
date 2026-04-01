@@ -35,13 +35,13 @@ const About = () => {
 						<p>
 							Mon approche est centrée sur le client : je m’assure que chaque projet reflète vos besoins tout en intégrant les meilleures pratiques de développement pour un code propre, performant et évolutif.
 						</p>
-						
+
 						<div className="pt-6 border-t border-slate-800/50 mt-8">
 							<h3 className="text-xl font-semibold text-white mb-4">Informations supplémentaires</h3>
 							<ul className="space-y-3">
 								<li className="flex gap-3">
 									<span className="text-primary-400 font-medium">Langues :</span>
-									<span>Français (natif), Anglais (C1 - courant)</span>
+									<span>Français (natif), Anglais (courant)</span>
 								</li>
 								<li className="flex gap-3">
 									<span className="text-primary-400 font-medium">Intérêts :</span>

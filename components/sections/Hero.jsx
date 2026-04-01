@@ -1,34 +1,8 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Mail } from 'lucide-react';
 import Image from 'next/image';
 
 const Hero = () => {
-	const texts = ['Analyse des projets.', 'Développeur Web.', 'Junior Mobile.'];
-	const [textIndex, setTextIndex] = useState(0);
-	const [subIndex, setSubIndex] = useState(0);
-	const [reverse, setReverse] = useState(false);
-
-	// Typing effect
-	useEffect(() => {
-		if (subIndex === texts[textIndex].length + 1 && !reverse) {
-			setTimeout(() => setReverse(true), 2000);
-			return;
-		}
-
-		if (subIndex === 0 && reverse) {
-			setReverse(false);
-			setTextIndex((prev) => (prev + 1) % texts.length);
-			return;
-		}
-
-		const timeout = setTimeout(() => {
-			setSubIndex((prev) => prev + (reverse ? -1 : 1));
-		}, Math.max(reverse ? 50 : 100, Math.random() * 150));
-
-		return () => clearTimeout(timeout);
-	}, [subIndex, textIndex, reverse]);
-
 	return (
 		<section className="relative pt-10 pb-12 md:pt-32 md:pb-32 flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-12 text-center md:text-left">
 			<div className="flex-1 w-full z-10">
@@ -43,8 +17,7 @@ const Hero = () => {
 					</h1>
 					<div className="h-[64px] sm:h-[80px] md:h-auto md:min-h-[48px] flex items-center md:items-start justify-center md:justify-start w-full mb-4 md:mb-6">
 						<h2 className="text-xl sm:text-2xl md:text-4xl text-slate-300 font-medium leading-snug">
-							{texts[textIndex].substring(0, subIndex)}
-							<span className="animate-ping inline-block w-[3px] h-6 sm:h-8 md:h-10 bg-primary-400 ml-1 translate-y-1"></span>
+							Analyste et Développeur Web
 						</h2>
 					</div>
 					<p className="text-base sm:text-lg text-slate-400 mb-8 max-w-xl leading-relaxed mx-auto md:mx-0">
