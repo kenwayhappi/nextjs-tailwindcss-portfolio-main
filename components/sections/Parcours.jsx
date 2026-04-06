@@ -4,16 +4,54 @@ import { GraduationCap, Briefcase } from 'lucide-react';
 const Parcours = () => {
 	const education = [
 		{ degree: 'Master 1 - Génie Logiciel', school: 'Polytechnique', year: '2025 - 2026' },
-		{ degree: 'Diplôme d’Ingénieur', school: 'IAI Douala', year: '2020 - 2023' },
-		{ degree: 'Licence en Informatique', school: 'IAI Douala', year: '2020 - 2023' },
+		{ degree: 'Diplôme d\'Ingénieur', school: 'Institut Africain d\'Informatique (IAI), Douala', year: '2020 - 2023' },
+		{ degree: 'Licence en Informatique', school: 'Institut Africain d\'Informatique (IAI), Douala', year: '2020 - 2023' },
 		{ degree: 'Baccalauréat Scientifique', school: 'Lycée Joss, Douala', year: '2017' },
 	];
 
 	const experience = [
-		{ title: 'Analyse et Développeur Web', company: 'Awatechno, Douala', year: 'De nov. 2025 à ce jour', tasks: ['Personnalisation et maintenance de sites WordPress (Template premium)', 'Développement d’applications web avec Next.js', 'Participation à l’analyse des besoins, à l’optimisation des interfaces et à la mise en production des solutions'] },
-		{ title: 'Stagiaire Développeur', company: 'AFRICAN WINDOWS SARL', year: '2022', tasks: ['Conception d’une application web de gestion avec Laravel', 'Optimisation des performances des bases de données', 'Collaboration avec une équipe agile'] },
-		{ title: 'Stagiaire IT', company: 'Mairie de Douala', year: '2021', tasks: ['Gestion de projets de numérisation', 'Support technique et formation des utilisateurs'] },
-		{ title: 'Stagiaire Mobile & Multimédia', company: 'CIJ', year: '2020', tasks: ['Développement d’une application mobile avec Flutter', 'Création de montages vidéo et infographies pour campagnes numériques', 'Tests unitaires et déploiement'] },
+		{
+			title: 'Analyste et Développeur Web',
+			company: 'Awatechno, Douala',
+			year: 'De nov. 2025 à ce jour',
+			tasks: [
+				'Personnalisation et maintenance de sites WordPress premium',
+				'Développement d\'applications web avec Next.js',
+				'Communication continue avec les clients à chaque étape du projet',
+				'Respect des délais et du budget définis en début de mission',
+				'Analyse des besoins, optimisation des interfaces et mise en production',
+			],
+		},
+		{
+			title: 'Stagiaire Développeur',
+			company: 'AFRICAN WINDOWS SARL',
+			year: '2022',
+			tasks: [
+				'Conception d\'une application web de gestion avec Laravel',
+				'Optimisation des performances des bases de données',
+				'Travail en méthode agile : livraisons itératives et points réguliers avec l\'équipe',
+				'Collaboration étroite avec le client pour valider chaque étape',
+			],
+		},
+		{
+			title: 'Stagiaire IT',
+			company: 'Mairie de Douala',
+			year: '2021',
+			tasks: [
+				'Gestion de projets de numérisation',
+				'Support technique et formation des utilisateurs',
+			],
+		},
+		{
+			title: 'Stagiaire Mobile & Multimédia',
+			company: 'CIJ',
+			year: '2020',
+			tasks: [
+				'Développement d\'une application mobile avec Flutter',
+				'Création de montages vidéo et infographies pour campagnes numériques',
+				'Tests unitaires et déploiement',
+			],
+		},
 	];
 
 	return (

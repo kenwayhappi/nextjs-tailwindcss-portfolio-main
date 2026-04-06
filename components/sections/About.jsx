@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Layers, Smartphone, Code2, Database, BarChart3, Terminal, Coffee } from 'lucide-react';
+import { Layers, Smartphone, Code2, Database, BarChart3, Terminal, Coffee, Bot, Zap } from 'lucide-react';
 
 const skills = [
 	{ title: 'Backend', tech: 'Laravel, PHP, Node.js', icon: <Terminal className="w-6 h-6 text-primary-400" /> },
@@ -9,6 +9,8 @@ const skills = [
 	{ title: 'Analyse de données', tech: 'R, R Shiny', icon: <BarChart3 className="w-6 h-6 text-primary-400" /> },
 	{ title: 'Java (Junior)', tech: 'POO, Spring Boot basics', icon: <Coffee className="w-6 h-6 text-accent" /> },
 	{ title: 'Python (Junior)', tech: 'Scripts, automatisation, pandas', icon: <Layers className="w-6 h-6 text-primary-400" /> },
+	{ title: 'IA & Vibe Coding', tech: 'ChatGPT, Claude, Copilot, Cursor', icon: <Bot className="w-6 h-6 text-accent" /> },
+	{ title: 'Outils & Méthodes', tech: 'Git, Agile/Scrum, Figma, VS Code', icon: <Zap className="w-6 h-6 text-primary-400" /> },
 ];
 
 const About = () => {
@@ -27,13 +29,16 @@ const About = () => {
 				<div className="grid md:grid-cols-2 gap-8 md:gap-16">
 					<div className="space-y-6 text-lg text-slate-400 leading-relaxed font-light">
 						<p>
-							Basé à <strong className="text-slate-200">Douala, Cameroun</strong>, je suis un développeur passionné par la création d’applications web et mobiles qui simplifient la vie des utilisateurs.
+							Basé à <strong className="text-slate-200">Douala, Cameroun</strong>, je suis un développeur passionné par la création d&apos;applications web et mobiles qui simplifient la vie des utilisateurs et apportent une réelle valeur à mes clients.
 						</p>
 						<p>
-							Avec une formation d’ingénieur en informatique et plusieurs années d’expérience, je combine créativité et rigueur technique pour livrer des projets d’exception.
+							Avec une formation d&apos;ingénieur en informatique, je combine créativité et rigueur technique pour livrer des projets d&apos;exception. Je maîtrise les <strong className="text-slate-200">méthodes agiles</strong> : je respecte les délais et les budgets convenus, en livrant itérativement pour rester aligné avec les attentes du client.
 						</p>
 						<p>
-							Mon approche est centrée sur le client : je m’assure que chaque projet reflète vos besoins tout en intégrant les meilleures pratiques de développement pour un code propre, performant et évolutif.
+							Mon approche est <strong className="text-slate-200">centrée sur le client</strong> : tout au long du projet, je communique régulièrement pour informer de l&apos;avancement, valider chaque étape et ajuster rapidement si nécessaire. Vous n&apos;êtes jamais laissé dans le flou.
+						</p>
+						<p>
+							Je maîtrise également les outils d&apos;<strong className="text-slate-200">intelligence artificielle et le Vibe Coding</strong> (ChatGPT, Claude, GitHub Copilot, Cursor) pour optimiser la productivité, accélérer le développement et garantir un code de qualité.
 						</p>
 
 						<div className="pt-6 border-t border-slate-800/50 mt-8">
