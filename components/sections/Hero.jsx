@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Download, ArrowRight } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
+import Image from 'next/image';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const TerminalSimulator = ({ lines }) => {
@@ -195,12 +196,15 @@ const Hero = () => {
 						<div className="relative mx-auto lg:mx-0 w-fit">
 							<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-600/30 via-accent/20 to-violetAccent/20 blur-2xl scale-110 -z-10 animate-pulse-slow"></div>
 							<div className="relative w-56 h-56 md:w-64 md:h-64 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-								<img
+								<Image
 									src="/profile.jpg"
 									alt="Happi Mathis"
-									className="w-full h-full object-cover"
+									fill
+									priority
+									sizes="(max-width: 768px) 224px, 256px"
+									className="object-cover"
 								/>
-								<div className="absolute inset-0 bg-gradient-to-t from-dark-950/60 via-transparent to-transparent"></div>
+								<div className="absolute inset-0 bg-gradient-to-t from-dark-950/60 via-transparent to-transparent z-10"></div>
 							</div>
 							{/* Floating badge */}
 							<div className="absolute -bottom-3 -right-3 flex items-center gap-2 px-3 py-1.5 bg-dark-800/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-xl">

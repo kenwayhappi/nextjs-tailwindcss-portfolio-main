@@ -6,14 +6,14 @@ import {
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const skillIcons = [
-	<Terminal className="w-5 h-5" />,
-	<Smartphone className="w-5 h-5" />,
-	<Code2 className="w-5 h-5" />,
-	<Database className="w-5 h-5" />,
-	<BarChart3 className="w-5 h-5" />,
-	<Coffee className="w-5 h-5" />,
-	<Layers className="w-5 h-5" />,
-	<Zap className="w-5 h-5" />,
+	<Terminal key="terminal" className="w-5 h-5" />,
+	<Smartphone key="smartphone" className="w-5 h-5" />,
+	<Code2 key="code2" className="w-5 h-5" />,
+	<Database key="database" className="w-5 h-5" />,
+	<BarChart3 key="barchart3" className="w-5 h-5" />,
+	<Coffee key="coffee" className="w-5 h-5" />,
+	<Layers key="layers" className="w-5 h-5" />,
+	<Zap key="zap" className="w-5 h-5" />,
 ];
 
 const skillColors = [
