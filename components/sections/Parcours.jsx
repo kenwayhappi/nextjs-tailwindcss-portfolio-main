@@ -1,133 +1,134 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Briefcase } from 'lucide-react';
+import { GraduationCap, Briefcase, Calendar, Building2 } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
+
+const TimelineItem = ({ item, isExperience, index, currentBadge }) => (
+	<motion.div
+		initial={{ opacity: 0, x: -20 }}
+		whileInView={{ opacity: 1, x: 0 }}
+		viewport={{ once: true }}
+		transition={{ delay: index * 0.1, duration: 0.5 }}
+		className="relative pl-8 group"
+	>
+		{/* Dot */}
+		<span
+			className={`absolute -left-[9px] top-1 w-[18px] h-[18px] rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+				isExperience && item.current
+					? 'bg-accent border-accent shadow-[0_0_12px_rgba(0,245,255,0.6)]'
+					: isExperience
+					? 'bg-dark-950 border-accent/50 group-hover:border-accent group-hover:shadow-[0_0_8px_rgba(0,245,255,0.3)]'
+					: 'bg-dark-950 border-primary-500/50 group-hover:border-primary-400 group-hover:shadow-[0_0_8px_rgba(99,102,241,0.3)]'
+			}`}
+		>
+			{isExperience && item.current && (
+				<span className="w-2 h-2 rounded-full bg-dark-950"></span>
+			)}
+		</span>
+
+		<div className="glass-card p-5 space-y-3 group-hover:-translate-y-0.5 transition-transform duration-300">
+			<div className="flex flex-wrap items-start justify-between gap-2">
+				<h4 className="text-white font-bold text-sm leading-tight">
+					{isExperience ? item.title : item.degree}
+				</h4>
+				{isExperience && item.current && (
+					<span className="flex-shrink-0 px-2 py-0.5 text-[10px] font-mono text-terminalGreen bg-terminalGreen/10 border border-terminalGreen/20 rounded-full">
+						{currentBadge}
+					</span>
+				)}
+			</div>
+
+			<div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
+				<span className={`font-semibold ${isExperience ? 'text-accent' : 'text-primary-400'}`}>
+					{isExperience ? item.company : item.school}
+				</span>
+				<span className="flex items-center gap-1">
+					<Building2 className="w-3 h-3" />
+					{item.location}
+				</span>
+				<span className="flex items-center gap-1">
+					<Calendar className="w-3 h-3" />
+					{item.year}
+				</span>
+			</div>
+
+			{isExperience && item.tasks && (
+				<ul className="space-y-1 border-t border-white/5 pt-2 mt-2">
+					{item.tasks.map((task, i) => (
+						<li key={i} className="flex items-start gap-2 text-xs text-slate-500">
+							<span className="flex-shrink-0 mt-1 w-1 h-1 rounded-full bg-accent"></span>
+							{task}
+						</li>
+					))}
+				</ul>
+			)}
+
+			{item.tags && (
+				<div className="flex flex-wrap gap-1.5 pt-1">
+					{item.tags.map((tag) => (
+						<span
+							key={tag}
+							className={`px-2 py-0.5 text-[10px] font-mono rounded-full border ${
+								isExperience
+									? 'text-accent/70 bg-accent/5 border-accent/15'
+									: 'text-primary-400/70 bg-primary-500/5 border-primary-500/15'
+							}`}
+						>
+							{tag}
+						</span>
+					))}
+				</div>
+			)}
+		</div>
+	</motion.div>
+);
 
 const Parcours = () => {
-	const education = [
-		{ degree: 'Master 1 - Génie Logiciel', school: 'Polytechnique', year: '2025 - 2026' },
-		{ degree: 'Diplôme d\'Ingénieur', school: 'Institut Africain d\'Informatique (IAI), Douala', year: '2020 - 2023' },
-		{ degree: 'Licence en Informatique', school: 'Institut Africain d\'Informatique (IAI), Douala', year: '2020 - 2023' },
-		{ degree: 'Baccalauréat Scientifique', school: 'Lycée Joss, Douala', year: '2017' },
-	];
-
-	const experience = [
-		{
-			title: 'Analyste et Développeur Web',
-			company: 'Awatechno, Douala',
-			year: 'De nov. 2025 à ce jour',
-			tasks: [
-				'Personnalisation et maintenance de sites WordPress premium',
-				'Développement d\'applications web avec Next.js',
-				'Communication continue avec les clients à chaque étape du projet',
-				'Respect des délais et du budget définis en début de mission',
-				'Analyse des besoins, optimisation des interfaces et mise en production',
-			],
-		},
-		{
-			title: 'Stagiaire Développeur',
-			company: 'AFRICAN WINDOWS SARL',
-			year: '2022',
-			tasks: [
-				'Conception d\'une application web de gestion avec Laravel',
-				'Optimisation des performances des bases de données',
-				'Travail en méthode agile : livraisons itératives et points réguliers avec l\'équipe',
-				'Collaboration étroite avec le client pour valider chaque étape',
-			],
-		},
-		{
-			title: 'Stagiaire IT',
-			company: 'Mairie de Douala',
-			year: '2021',
-			tasks: [
-				'Gestion de projets de numérisation',
-				'Support technique et formation des utilisateurs',
-			],
-		},
-		{
-			title: 'Stagiaire Mobile & Multimédia',
-			company: 'CIJ',
-			year: '2020',
-			tasks: [
-				'Développement d\'une application mobile avec Flutter',
-				'Création de montages vidéo et infographies pour campagnes numériques',
-				'Tests unitaires et déploiement',
-			],
-		},
-	];
+	const { t } = useLanguage();
+	const p = t.parcours;
 
 	return (
-		<section id="parcours" className="scroll-mt-24">
+		<section id="parcours" className="scroll-mt-24 py-8">
 			<motion.div
-				initial={{ opacity: 0, y: 30 }}
+				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
 				transition={{ duration: 0.6 }}
 			>
-				<h2 className="text-3xl md:text-5xl font-bold mb-10 md:mb-16 text-center text-white">
-					Mon <span className="text-gradient">Parcours</span>
-				</h2>
+				{/* Section Header */}
+				<div className="mb-14 text-center lg:text-left">
+					<p className="font-mono text-primary-400 text-sm mb-3 tracking-widest">{p.sectionNum}</p>
+					<h2 className="text-4xl md:text-5xl font-bold text-white">
+						{p.title} <span className="text-gradient">{p.titleHighlight}</span>
+					</h2>
+				</div>
 
-				<div className="grid md:grid-cols-2 gap-12 mt-8 md:mt-0">
-					{/* Education Timeline */}
+				<div className="grid lg:grid-cols-2 gap-10 lg:gap-16 mt-8">
+					{/* Education */}
 					<div>
 						<div className="flex items-center gap-3 mb-8">
-							<div className="p-3 bg-primary-600/20 text-primary-400 rounded-xl">
-								<GraduationCap className="w-8 h-8" />
+							<div className="p-2.5 bg-primary-500/10 border border-primary-500/20 rounded-xl">
+								<GraduationCap className="w-6 h-6 text-primary-400" />
 							</div>
-							<h3 className="text-2xl font-bold text-white">Éducation</h3>
+							<h3 className="text-xl font-bold text-white">{p.formationTitle}</h3>
 						</div>
-
-						<div className="relative border-l-2 border-slate-700/50 ml-6 space-y-10 pb-8">
-							{education.map((item, index) => (
-								<motion.div
-									key={index}
-									initial={{ opacity: 0, x: -20 }}
-									whileInView={{ opacity: 1, x: 0 }}
-									viewport={{ once: true }}
-									transition={{ delay: index * 0.1, duration: 0.5 }}
-									className="relative pl-8"
-								>
-									<span className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-dark-900 border-2 border-primary-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
-									<h4 className="text-lg font-bold text-white mb-1">{item.degree}</h4>
-									<div className="text-primary-400 text-sm font-semibold mb-2">{item.school}</div>
-									<div className="inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-slate-400 font-medium">
-										{item.year}
-									</div>
-								</motion.div>
+						<div className="relative border-l-2 border-primary-500/20 ml-[9px] space-y-6 pb-6">
+							{p.education.map((item, index) => (
+								<TimelineItem key={index} item={item} isExperience={false} index={index} currentBadge={p.currentBadge} />
 							))}
 						</div>
 					</div>
 
-					{/* Experience Timeline */}
+					{/* Experience */}
 					<div>
 						<div className="flex items-center gap-3 mb-8">
-							<div className="p-3 bg-accent/20 text-accent rounded-xl">
-								<Briefcase className="w-8 h-8" />
+							<div className="p-2.5 bg-accent/10 border border-accent/20 rounded-xl">
+								<Briefcase className="w-6 h-6 text-accent" />
 							</div>
-							<h3 className="text-2xl font-bold text-white">Expérience</h3>
+							<h3 className="text-xl font-bold text-white">{p.experienceTitle}</h3>
 						</div>
-
-						<div className="relative border-l-2 border-slate-700/50 mt-8 ml-6 space-y-10 pb-8">
-							{experience.map((item, index) => (
-								<motion.div
-									key={index}
-									initial={{ opacity: 0, x: -20 }}
-									whileInView={{ opacity: 1, x: 0 }}
-									viewport={{ once: true }}
-									transition={{ delay: index * 0.1, duration: 0.5 }}
-									className="relative pl-8"
-								>
-									<span className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-dark-900 border-2 border-accent shadow-[0_0_10px_rgba(56,189,248,0.5)]"></span>
-									<h4 className="text-lg font-bold text-white mb-1">{item.title}</h4>
-									<div className="text-accent text-sm font-semibold mb-2">{item.company}</div>
-									<div className="inline-block px-3 py-1 rounded-full bg-slate-800 text-xs text-slate-400 font-medium mb-4">
-										{item.year}
-									</div>
-									<ul className="list-disc list-inside text-sm text-slate-400 space-y-1 leading-relaxed">
-										{item.tasks.map((task, i) => (
-											<li key={i}>{task}</li>
-										))}
-									</ul>
-								</motion.div>
+						<div className="relative border-l-2 border-accent/20 ml-[9px] space-y-6 pb-6">
+							{p.experience.map((item, index) => (
+								<TimelineItem key={index} item={item} isExperience={true} index={index} currentBadge={p.currentBadge} />
 							))}
 						</div>
 					</div>

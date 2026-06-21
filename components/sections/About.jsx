@@ -1,80 +1,174 @@
 import { motion } from 'framer-motion';
-import { Layers, Smartphone, Code2, Database, BarChart3, Terminal, Coffee, Bot, Zap } from 'lucide-react';
+import {
+	Terminal, Smartphone, Code2, Database, BarChart3,
+	Coffee, Zap, Layers, MapPin, Globe, Monitor, Users, Lock, Bot
+} from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-const skills = [
-	{ title: 'Backend', tech: 'Laravel, PHP, Node.js', icon: <Terminal className="w-6 h-6 text-primary-400" /> },
-	{ title: 'Mobile', tech: 'Flutter, Dart', icon: <Smartphone className="w-6 h-6 text-accent" /> },
-	{ title: 'Frontend', tech: 'HTML, CSS, JS, Tailwind, Next.js', icon: <Code2 className="w-6 h-6 text-primary-400" /> },
-	{ title: 'Bases de données', tech: 'MySQL, Firebase', icon: <Database className="w-6 h-6 text-accent" /> },
-	{ title: 'Analyse de données', tech: 'R, R Shiny', icon: <BarChart3 className="w-6 h-6 text-primary-400" /> },
-	{ title: 'Java (Junior)', tech: 'POO, Spring Boot basics', icon: <Coffee className="w-6 h-6 text-accent" /> },
-	{ title: 'Python (Junior)', tech: 'Scripts, automatisation, pandas', icon: <Layers className="w-6 h-6 text-primary-400" /> },
-	{ title: 'IA & Vibe Coding', tech: 'ChatGPT, Claude, Copilot, Cursor', icon: <Bot className="w-6 h-6 text-accent" /> },
-	{ title: 'Outils & Méthodes', tech: 'Git, Agile/Scrum, Figma, VS Code', icon: <Zap className="w-6 h-6 text-primary-400" /> },
+const skillIcons = [
+	<Terminal className="w-5 h-5" />,
+	<Smartphone className="w-5 h-5" />,
+	<Code2 className="w-5 h-5" />,
+	<Database className="w-5 h-5" />,
+	<BarChart3 className="w-5 h-5" />,
+	<Coffee className="w-5 h-5" />,
+	<Layers className="w-5 h-5" />,
+	<Zap className="w-5 h-5" />,
 ];
 
+const skillColors = [
+	'text-primary-400 bg-primary-500/10 border-primary-500/20',
+	'text-accent bg-accent/10 border-accent/20',
+	'text-violetAccent bg-violetAccent/10 border-violetAccent/20',
+	'text-primary-400 bg-primary-500/10 border-primary-500/20',
+	'text-accent bg-accent/10 border-accent/20',
+	'text-violetAccent bg-violetAccent/10 border-violetAccent/20',
+	'text-primary-400 bg-primary-500/10 border-primary-500/20',
+	'text-accent bg-accent/10 border-accent/20',
+];
+
+const aiTools = ['ChatGPT', 'Claude', 'GitHub Copilot', 'Cursor'];
+
+const fadeUp = {
+	hidden: { opacity: 0, y: 24 },
+	visible: (i = 0) => ({
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.55, delay: i * 0.08, ease: 'easeOut' },
+	}),
+};
+
 const About = () => {
+	const { t } = useLanguage();
+	const a = t.about;
+
 	return (
-		<section id="about" className="scroll-mt-24">
+		<section id="about" className="scroll-mt-24 py-8">
 			<motion.div
-				initial={{ opacity: 0, y: 30 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true, margin: '-100px' }}
-				transition={{ duration: 0.6 }}
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true, margin: '-80px' }}
 			>
-				<h2 className="text-3xl md:text-5xl font-bold mb-8 md:mb-12 text-center md:text-left text-white">
-					À propos de <span className="text-gradient">moi</span>
-				</h2>
+				{/* Section Header */}
+				<motion.div variants={fadeUp} className="mb-14 text-center lg:text-left">
+					<p className="font-mono text-accent text-sm mb-3 tracking-widest">{a.sectionNum}</p>
+					<h2 className="text-4xl md:text-5xl font-bold text-white">
+						{a.title} <span className="text-gradient">{a.titleHighlight}</span>
+					</h2>
+				</motion.div>
 
-				<div className="grid md:grid-cols-2 gap-8 md:gap-16">
-					<div className="space-y-6 text-lg text-slate-400 leading-relaxed font-light">
-						<p>
-							Basé à <strong className="text-slate-200">Douala, Cameroun</strong>, je suis un développeur passionné par la création d&apos;applications web et mobiles qui simplifient la vie des utilisateurs et apportent une réelle valeur à mes clients.
-						</p>
-						<p>
-							Avec une formation d&apos;ingénieur en informatique, je combine créativité et rigueur technique pour livrer des projets d&apos;exception. Je maîtrise les <strong className="text-slate-200">méthodes agiles</strong> : je respecte les délais et les budgets convenus, en livrant itérativement pour rester aligné avec les attentes du client.
-						</p>
-						<p>
-							Mon approche est <strong className="text-slate-200">centrée sur le client</strong> : tout au long du projet, je communique régulièrement pour informer de l&apos;avancement, valider chaque étape et ajuster rapidement si nécessaire. Vous n&apos;êtes jamais laissé dans le flou.
-						</p>
-						<p>
-							Je maîtrise également les outils d&apos;<strong className="text-slate-200">intelligence artificielle et le Vibe Coding</strong> (ChatGPT, Claude, GitHub Copilot, Cursor) pour optimiser la productivité, accélérer le développement et garantir un code de qualité.
-						</p>
+				{/* Bento Grid */}
+				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 auto-rows-auto">
 
-						<div className="pt-6 border-t border-slate-800/50 mt-8">
-							<h3 className="text-xl font-semibold text-white mb-4">Informations supplémentaires</h3>
-							<ul className="space-y-3">
-								<li className="flex gap-3">
-									<span className="text-primary-400 font-medium">Langues :</span>
-									<span>Français (natif), Anglais (courant)</span>
-								</li>
-								<li className="flex gap-3">
-									<span className="text-primary-400 font-medium">Intérêts :</span>
-									<span>Football, jeux vidéo (FIFA, COD), lecture tech</span>
-								</li>
-							</ul>
+					{/* 1 — Qui suis-je ? */}
+					<motion.div
+						custom={0} variants={fadeUp}
+						className="md:col-span-2 xl:col-span-2 glass-card p-7 space-y-4"
+					>
+						<div className="flex items-center gap-3 mb-4">
+							<div className="w-1 h-8 bg-gradient-to-b from-primary-400 to-accent rounded-full"></div>
+							<h3 className="text-xl font-bold text-white">{a.whoTitle}</h3>
 						</div>
-					</div>
+						<p className="text-slate-400 leading-relaxed">
+							{a.whoP1} <strong className="text-white">{a.whoP1Bold}</strong>{a.whoP1Rest}
+						</p>
+						<p className="text-slate-400 leading-relaxed">
+							{a.whoP2Start} <strong className="text-white">{a.whoP2Bold}</strong>{a.whoP2End}
+						</p>
+						<p className="text-slate-400 leading-relaxed">
+							{a.whoP3Start} <strong className="text-white">{a.whoP3Bold}</strong>{a.whoP3End}
+						</p>
 
-					<div>
-						<h3 className="text-2xl font-bold text-white mb-6">Compétences</h3>
-						<div className="grid sm:grid-cols-2 gap-4">
-							{skills.map((skill, index) => (
+						<div className="flex flex-wrap gap-4 pt-4 border-t border-white/5">
+							<div className="flex items-center gap-2 text-slate-400 text-sm">
+								<MapPin className="w-4 h-4 text-accent" />
+								<span>{a.locationLabel}</span>
+							</div>
+							<div className="flex items-center gap-2 text-slate-400 text-sm">
+								<Globe className="w-4 h-4 text-primary-400" />
+								<span>{a.languagesLabel}</span>
+							</div>
+							<div className="flex items-center gap-2 text-slate-400 text-sm">
+								<Monitor className="w-4 h-4 text-violetAccent" />
+								<span>{a.hobbiesLabel}</span>
+							</div>
+						</div>
+					</motion.div>
+
+					{/* 2 — IA & Vibe Coding */}
+					<motion.div
+						custom={1} variants={fadeUp}
+						className="glass-card p-7 flex flex-col justify-between relative overflow-hidden group"
+					>
+						<div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl -translate-x-4 -translate-y-4 group-hover:bg-accent/10 transition-all duration-500"></div>
+						<div>
+							<div className="p-3 bg-accent/10 rounded-xl border border-accent/20 w-fit mb-5">
+								<Bot className="w-7 h-7 text-accent" />
+							</div>
+							<h3 className="text-lg font-bold text-white mb-3">{a.aiTitle}</h3>
+							<p className="text-slate-400 text-sm leading-relaxed mb-5">{a.aiText}</p>
+						</div>
+						<div className="flex flex-wrap gap-2">
+							{aiTools.map((tool) => (
+								<span
+									key={tool}
+									className="px-3 py-1 text-xs font-mono text-accent bg-accent/10 border border-accent/20 rounded-full"
+								>
+									{tool}
+								</span>
+							))}
+						</div>
+					</motion.div>
+
+					{/* 3 — Méthode Agile */}
+					<motion.div
+						custom={2} variants={fadeUp}
+						className="glass-card p-7 flex flex-col gap-5"
+					>
+						<div className="p-3 bg-violetAccent/10 rounded-xl border border-violetAccent/20 w-fit">
+							<Users className="w-7 h-7 text-violetAccent" />
+						</div>
+						<div>
+							<h3 className="text-lg font-bold text-white mb-2">{a.methodTitle}</h3>
+							<p className="text-slate-400 text-sm leading-relaxed">{a.methodText}</p>
+						</div>
+						<div className="flex flex-col gap-2 mt-auto">
+							{a.methodItems.map((item) => (
+								<div key={item} className="flex items-center gap-2.5">
+									<div className="w-1.5 h-1.5 rounded-full bg-violetAccent flex-shrink-0"></div>
+									<span className="text-slate-400 text-sm">{item}</span>
+								</div>
+							))}
+						</div>
+					</motion.div>
+
+					{/* 4 — Compétences techniques */}
+					<motion.div
+						custom={3} variants={fadeUp}
+						className="md:col-span-2 glass-card p-7"
+					>
+						<h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+							<Lock className="w-5 h-5 text-primary-400" />
+							{a.skillsTitle}
+						</h3>
+						<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+							{a.skills.map((skill, index) => (
 								<motion.div
 									key={index}
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									viewport={{ once: true }}
-									transition={{ delay: index * 0.1, duration: 0.5 }}
-									className="glass-card p-5"
+									custom={index * 0.5} variants={fadeUp}
+									className={`flex items-start gap-3 p-3 rounded-xl border ${skillColors[index]} bg-opacity-10 transition-all duration-300 hover:-translate-y-0.5`}
 								>
-									<div className="mb-3 p-3 bg-dark-900/50 rounded-lg inline-block">{skill.icon}</div>
-									<h4 className="text-white font-medium mb-1">{skill.title}</h4>
-									<p className="text-sm text-slate-400">{skill.tech}</p>
+									<div className={`flex-shrink-0 p-1.5 rounded-lg ${skillColors[index]} border`}>
+										{skillIcons[index]}
+									</div>
+									<div>
+										<p className="text-white text-sm font-semibold leading-tight">{skill.title}</p>
+										<p className="text-xs text-slate-500 mt-0.5 leading-tight">{skill.tech}</p>
+									</div>
 								</motion.div>
 							))}
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			</motion.div>
 		</section>

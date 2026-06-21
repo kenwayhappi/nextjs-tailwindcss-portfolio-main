@@ -7,7 +7,7 @@ import Contact from '../components/sections/Contact';
 
 export default function Home() {
 	return (
-		<div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-20 md:space-y-32">
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-28 md:space-y-40">
 			<Hero />
 			<About />
 			<Parcours />

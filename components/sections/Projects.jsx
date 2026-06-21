@@ -1,192 +1,299 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { X, ExternalLink, Code } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ExternalLink, Code, Terminal } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-const projects = [
+// Static project metadata (same for both languages)
+const projectsMeta = [
 	{
 		id: 'almanac',
-		title: 'Site Web Almanac',
-		color: 'from-blue-500 to-blue-700',
-		summary: 'Application Laravel de gestion des villages et personnalités administratives au Cameroun.',
-		description: 'Cette application web a été développée pour centraliser et structurer les données administratives du Cameroun : villages, groupements et personnalités locales. Elle permet aux administrateurs et citoyens de rechercher facilement un village (comme Balassie ou Ndongom), visualiser les hiérarchies administratives et consulter les informations sur les chefs et groupements. L\'apport principal : remplacer un système dispersé et papier par une plateforme digitale fiable, accessible et maintenable.',
+		category: 'Laravel',
+		color: '#3b82f6',
+		gradient: 'from-blue-600/30 to-blue-900/10',
 		link: 'https://aw-cameroon.com',
 		tech: ['Laravel', 'MySQL', 'PHP', 'Blade', 'Bootstrap'],
 	},
 	{
-		id: 'bureau-vente',
-		title: 'Système de Gestion Bureau de Vente',
-		color: 'from-emerald-500 to-emerald-700',
-		summary: 'Application locale de gestion des ventes, stocks et transactions commerciales.',
-		description: 'Un outil interne développé sur-mesure pour un bureau de vente afin d\'automatiser le suivi des stocks, l\'enregistrement des ventes et la gestion des transactions. Avant cet outil, tout était géré manuellement avec des risques d\'erreurs et de pertes de données. Avec cette application, le responsable dispose en temps réel d\'un tableau de bord clair, d\'historiques de ventes et d\'alertes sur les niveaux de stock. Développé avec Laravel et MySQL, il est optimisé pour une utilisation en réseau local.',
+		id: 'laravel-voting',
+		category: 'Laravel',
+		color: '#10b981',
+		gradient: 'from-emerald-600/30 to-emerald-900/10',
 		link: null,
-		tech: ['Laravel', 'MySQL', 'Tailwind CSS', 'JavaScript'],
+		tech: ['Laravel', 'Sanctum', 'MySQL', 'Tailwind CSS', 'Artisan Tasks'],
 	},
 	{
 		id: 'r-shiny',
-		title: 'Application R Shiny — Analyse de Données',
-		color: 'from-purple-500 to-purple-700',
-		summary: 'Dashboard interactif R Shiny pour analyser les habitudes d\'utilisation des smartphones.',
-		description: 'Cette application interactive permet d\'explorer et de visualiser les résultats du questionnaire NBMB sur l\'utilisation des smartphones. Grâce à des graphiques dynamiques, des tableaux récapitulatifs et des filtres interactifs, les chercheurs peuvent identifier des tendances comportementales, segmenter les utilisateurs et extraire des insights stratégiques. L\'outil transforme des données brutes en décisions éclairées. Déployé sur shinyapps.io pour un accès facile sans installation.',
+		category: 'R/Shiny',
+		color: '#a855f7',
+		gradient: 'from-purple-600/30 to-purple-900/10',
 		link: 'https://kenwaydev.shinyapps.io/ACM-teste/',
-		tech: ['R', 'R Shiny', 'ggplot2', 'Data Analysis', 'Déploiement Cloud'],
+		tech: ['R', 'R Shiny', 'ggplot2', 'Data Analysis', 'Cloud Deploy'],
 	},
 	{
 		id: 'defgi',
-		title: 'Site Vitrine WordPress — Defgi',
-		color: 'from-orange-500 to-orange-700',
-		summary: 'Site vitrine WordPress pour améliorer la visibilité en ligne de Defgi.',
-		description: 'Réalisation d\'un site vitrine WordPress professionnel pour Defgi afin d\'accroître leur visibilité sur internet et d\'attirer de nouveaux clients. Le site présente clairement leurs activités, leurs valeurs et leurs contacts avec un design responsive adapté mobile. Des optimisations SEO de base ont été intégrées pour améliorer le référencement naturel sur les moteurs de recherche. Outils utilisés : WordPress, Elementor, plugins SEO (Yoast), hébergement optimisé.',
+		category: 'WordPress',
+		color: '#f97316',
+		gradient: 'from-orange-600/30 to-orange-900/10',
 		link: 'https://defgi.org/',
-		tech: ['WordPress', 'Elementor', 'SEO', 'Responsive Design', 'Yoast SEO'],
+		tech: ['WordPress', 'Elementor', 'SEO', 'Responsive', 'Yoast'],
 	},
 	{
 		id: 'awatechno',
-		title: 'Site Vitrine WordPress — Awatechno',
-		color: 'from-sky-500 to-sky-700',
-		summary: 'Site vitrine WordPress pour renforcer la présence digitale d\'Awatechno.',
-		description: 'Développement du site vitrine WordPress pour Awatechno, une agence tech de Douala. L\'objectif : leur donner une présence professionnelle sur le web pour se différencier de la concurrence et rassurer les clients potentiels. Le site présente leurs services avec une navigation claire, un design moderne adapté mobile et un temps de chargement optimisé. Ce projet illustre ma capacité à livrer des sites vitrines clé en main, de la mise en page à la mise en ligne.',
+		category: 'WordPress',
+		color: '#0ea5e9',
+		gradient: 'from-sky-600/30 to-sky-900/10',
 		link: 'https://awatechno.com/',
 		tech: ['WordPress', 'Elementor', 'Web Design', 'Performance', 'Hébergement'],
 	},
 ];
 
+const categoryColors = {
+	Laravel: 'text-red-400 bg-red-500/10 border-red-500/20',
+	WordPress: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+	'R/Shiny': 'text-violetAccent bg-violetAccent/10 border-violetAccent/20',
+};
+
+const filterCategories = ['Laravel', 'WordPress', 'R/Shiny'];
+
+const ProjectCard = ({ project, onClick, index }) => (
+	<motion.div
+		initial={{ opacity: 0, y: 20 }}
+		whileInView={{ opacity: 1, y: 0 }}
+		viewport={{ once: true }}
+		transition={{ delay: index * 0.08, duration: 0.5 }}
+		className="glass-card flex flex-col h-full cursor-pointer group overflow-hidden"
+		onClick={() => onClick(project)}
+		role="button"
+		tabIndex={0}
+		onKeyDown={(e) => e.key === 'Enter' && onClick(project)}
+	>
+		{/* IDE-style header bar */}
+		<div className={`flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-gradient-to-r ${project.gradient}`}>
+			<span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+			<span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+			<span className="w-2.5 h-2.5 rounded-full bg-terminalGreen/80"></span>
+			<span className="ml-2 text-xs font-mono text-slate-400 truncate flex-1">{project.id}.js</span>
+			<Terminal className="w-3.5 h-3.5 text-slate-500" />
+		</div>
+
+		{/* Content */}
+		<div className="p-5 flex-1 flex flex-col">
+			<div className="flex items-start justify-between gap-2 mb-3">
+				<h3 className="text-white font-bold text-sm leading-snug group-hover:text-accent transition-colors duration-300">
+					{project.title}
+				</h3>
+				<span className={`flex-shrink-0 px-2 py-0.5 text-[10px] font-mono rounded-full border ${categoryColors[project.category] || 'text-slate-400 bg-slate-800 border-slate-700'}`}>
+					{project.category}
+				</span>
+			</div>
+
+			<p className="text-slate-500 text-xs leading-relaxed flex-1 mb-4">{project.summary}</p>
+
+			<div className="flex flex-wrap gap-1.5 mb-4">
+				{project.tech.slice(0, 3).map((t, i) => (
+					<span key={i} className="text-[10px] px-2 py-0.5 bg-dark-800 text-slate-400 rounded-md border border-white/5 font-mono">
+						{t}
+					</span>
+				))}
+				{project.tech.length > 3 && (
+					<span className="text-[10px] px-2 py-0.5 bg-dark-800 text-slate-500 rounded-md border border-white/5 font-mono">
+						+{project.tech.length - 3}
+					</span>
+				)}
+			</div>
+
+			<div className="flex justify-between items-center pt-3 border-t border-white/5">
+				<span className="text-primary-400 text-xs font-semibold group-hover:text-accent transition-colors duration-300">
+					{project.viewDetails}
+				</span>
+				<Code className="w-4 h-4 text-slate-600 group-hover:text-primary-400 transition-colors duration-300" />
+			</div>
+		</div>
+	</motion.div>
+);
+
 const Projects = () => {
+	const { t } = useLanguage();
+	const p = t.projects;
+
 	const [selectedProject, setSelectedProject] = useState(null);
-	// Gardez une copie du projet pour l'afficher pendant l'animation de fermeture
+	const [activeFilter, setActiveFilter] = useState('ALL');
 	const projectRef = useRef(null);
 
 	const isOpen = selectedProject !== null;
-
-	// Met à jour la ref uniquement quand on ouvre un projet
-	if (selectedProject) {
-		projectRef.current = selectedProject;
-	}
+	if (selectedProject) projectRef.current = selectedProject;
 
 	const closeModal = () => {
 		setSelectedProject(null);
+		document.body.style.overflow = '';
+		document.body.style.pointerEvents = '';
 	};
 
-	// Bloque le scroll du body quand le modal est ouvert
 	useEffect(() => {
-		document.body.style.overflow = isOpen ? 'hidden' : '';
-		return () => { document.body.style.overflow = ''; };
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+			document.body.style.pointerEvents = '';
+		}
+		return () => {
+			document.body.style.overflow = '';
+			document.body.style.pointerEvents = '';
+		};
 	}, [isOpen]);
+
+	// Merge meta (static) with translated text
+	const projects = projectsMeta.map((meta) => {
+		const translated = p.data.find((d) => d.id === meta.id) || {};
+		return { ...meta, ...translated, viewDetails: p.viewDetails };
+	});
+
+	const filteredProjects = activeFilter === 'ALL'
+		? projects
+		: projects.filter((proj) => proj.category === activeFilter);
 
 	const displayedProject = projectRef.current;
 
 	return (
-		<section id="projects" className="scroll-mt-24">
+		<section id="projects" className="scroll-mt-24 py-8">
 			<motion.div
-				initial={{ opacity: 0, y: 30 }}
+				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
 				transition={{ duration: 0.6 }}
 			>
-				<h2 className="text-3xl md:text-5xl font-bold mb-10 md:mb-16 text-center text-white">
-					Mes <span className="text-gradient">Réalisations</span>
-				</h2>
+				{/* Section Header */}
+				<div className="mb-10 text-center lg:text-left">
+					<p className="font-mono text-accent text-sm mb-3 tracking-widest">{p.sectionNum}</p>
+					<h2 className="text-4xl md:text-5xl font-bold text-white">
+						{p.title} <span className="text-gradient">{p.titleHighlight}</span>
+					</h2>
+				</div>
 
-				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-					{projects.map((project, index) => (
-						<motion.div
-							key={project.id}
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: index * 0.1, duration: 0.5 }}
-							className="glass-card flex flex-col h-full overflow-hidden group cursor-pointer"
-							onClick={() => setSelectedProject(project)}
+				{/* Filter tabs */}
+				<div className="flex flex-wrap gap-2 mb-10">
+					{/* "All" button */}
+					<button
+						onClick={() => setActiveFilter('ALL')}
+						className={`px-4 py-2 rounded-xl text-sm font-medium font-mono transition-all duration-300 border ${
+							activeFilter === 'ALL'
+								? 'bg-primary-600/30 border-primary-500/50 text-primary-300'
+								: 'bg-dark-800/40 border-white/5 text-slate-500 hover:text-slate-300 hover:border-white/10'
+						}`}
+					>
+						{p.filterAll}
+					</button>
+					{filterCategories.map((cat) => (
+						<button
+							key={cat}
+							onClick={() => setActiveFilter(cat)}
+							className={`px-4 py-2 rounded-xl text-sm font-medium font-mono transition-all duration-300 border ${
+								activeFilter === cat
+									? 'bg-primary-600/30 border-primary-500/50 text-primary-300'
+									: 'bg-dark-800/40 border-white/5 text-slate-500 hover:text-slate-300 hover:border-white/10'
+							}`}
 						>
-							<div className={`h-40 bg-gradient-to-br ${project.color} opacity-80 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 text-center`}>
-								<h3 className="text-2xl font-bold text-white mix-blend-overlay drop-shadow-md">{project.title}</h3>
-							</div>
-							<div className="p-6 flex-1 flex flex-col">
-								<p className="text-slate-400 mb-6 flex-1 text-sm">{project.summary}</p>
-								<div className="flex flex-wrap gap-1 mb-4">
-									{project.tech.slice(0, 3).map((t, i) => (
-										<span key={i} className="text-xs px-2 py-0.5 bg-slate-800 text-slate-400 rounded-full border border-slate-700/50">
-											{t}
-										</span>
-									))}
-								</div>
-								<div className="flex justify-between items-center mt-auto pt-4 border-t border-slate-700/50">
-									<span className="text-primary-400 text-sm font-semibold group-hover:underline">Voir les détails</span>
-									<Code className="w-5 h-5 text-slate-500 group-hover:text-primary-400 transition-colors" />
-								</div>
-							</div>
-						</motion.div>
+							{cat}
+						</button>
+					))}
+				</div>
+
+				{/* Grid */}
+				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+					{filteredProjects.map((project, index) => (
+						<ProjectCard
+							key={project.id}
+							project={project}
+							onClick={setSelectedProject}
+							index={index}
+						/>
 					))}
 				</div>
 			</motion.div>
 
-			{/* Project Modal — toujours rendu, pointer-events coupés quand fermé */}
-			<motion.div
-				initial={false}
-				animate={{ opacity: isOpen ? 1 : 0 }}
-				transition={{ duration: 0.2 }}
-				style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-				className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-dark-900/80 backdrop-blur-sm"
-				onClick={closeModal}
-			>
-				<motion.div
-					initial={false}
-					animate={{ scale: isOpen ? 1 : 0.95, opacity: isOpen ? 1 : 0 }}
-					transition={{ duration: 0.2 }}
-					onClick={(e) => e.stopPropagation()}
-					className="bg-dark-800 border border-slate-700 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
-				>
-					{displayedProject && (
-						<>
-							<div className={`h-32 bg-gradient-to-br ${displayedProject.color} p-6 relative flex items-end justify-between`}>
+			{/* Modal */}
+			<AnimatePresence>
+				{isOpen && displayedProject && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0, pointerEvents: 'none' }}
+						transition={{ duration: 0.15 }}
+						style={isOpen ? {} : { pointerEvents: 'none' }}
+						className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-dark-950/85 backdrop-blur-md"
+						onClick={closeModal}
+					>
+						<motion.div
+							initial={{ scale: 0.94, opacity: 0, y: 10 }}
+							animate={{ scale: 1, opacity: 1, y: 0 }}
+							exit={{ scale: 0.94, opacity: 0, y: 10 }}
+							transition={{ duration: 0.2, ease: 'easeOut' }}
+							onClick={(e) => e.stopPropagation()}
+							className="bg-dark-900 border border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+						>
+							{/* Modal header */}
+							<div className={`flex items-center gap-2 px-5 py-4 border-b border-white/5 bg-gradient-to-r ${displayedProject.gradient}`}>
 								<button
 									onClick={closeModal}
-									className="absolute top-4 right-4 p-2 bg-black/20 hover:bg-black/40 rounded-full text-white backdrop-blur-md transition-colors"
+									className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-400 transition-colors group"
+									aria-label="Fermer"
 								>
-									<X size={20} />
+									<span className="hidden group-hover:block">
+										<X size={8} className="text-red-900 mx-auto" />
+									</span>
 								</button>
+								<span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+								<span className="w-3 h-3 rounded-full bg-terminalGreen/80"></span>
+								<span className="ml-4 text-xs font-mono text-slate-300">{displayedProject.id}.js</span>
 							</div>
 
-							<div className="p-8 overflow-y-auto">
-								<h3 className="text-3xl font-bold text-white mb-4">{displayedProject.title}</h3>
+							{/* Modal body */}
+							<div className="p-6 md:p-7 overflow-y-auto flex flex-col gap-5">
+								<div>
+									<h3 className="text-xl md:text-2xl font-bold text-white mb-2">{displayedProject.title}</h3>
+									<span className={`inline-block px-3 py-1 text-xs font-mono rounded-full border ${categoryColors[displayedProject.category] || ''}`}>
+										{displayedProject.category}
+									</span>
+								</div>
 
-								<div className="flex flex-wrap gap-2 mb-6">
-									{displayedProject.tech.map((t, idx) => (
-										<span key={idx} className="px-3 py-1 bg-primary-600/20 text-primary-400 text-xs rounded-full font-medium border border-primary-500/20">
-											{t}
+								<div className="flex flex-wrap gap-2">
+									{displayedProject.tech.map((tech, idx) => (
+										<span key={idx} className="px-3 py-1 bg-primary-600/10 text-primary-300 text-xs rounded-full font-mono border border-primary-500/20">
+											{tech}
 										</span>
 									))}
 								</div>
 
-								<p className="text-slate-300 leading-relaxed mb-8">{displayedProject.description}</p>
+								<p className="text-slate-400 leading-relaxed text-sm">{displayedProject.description}</p>
 
-								<div className="flex items-center gap-4">
+								<div className="flex flex-wrap items-center gap-3 mt-2">
 									{displayedProject.link ? (
 										<a
 											href={displayedProject.link}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-primary-500/50 flex items-center gap-2"
+											className="flex items-center gap-2 px-6 py-2.5 bg-primary-600 hover:bg-primary-500 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-primary-500/30 text-sm"
 										>
-											Visiter le projet
-											<ExternalLink size={18} />
+											{p.visitProject}
+											<ExternalLink size={15} />
 										</a>
 									) : (
-										<span className="px-6 py-3 bg-slate-800 text-slate-400 font-semibold rounded-xl flex items-center gap-2">
-											Projet Local (non publié)
+										<span className="px-6 py-2.5 bg-dark-800 text-slate-500 font-medium rounded-xl text-sm border border-white/5">
+											{p.localProject}
 										</span>
 									)}
 									<button
 										onClick={closeModal}
-										className="px-6 py-3 bg-transparent hover:bg-slate-800 text-white font-medium rounded-xl transition-all"
+										className="px-6 py-2.5 text-slate-400 hover:text-white font-medium rounded-xl hover:bg-white/5 transition-all text-sm"
 									>
-										Fermer
+										{p.close}
 									</button>
 								</div>
 							</div>
-						</>
-					)}
-				</motion.div>
-			</motion.div>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</section>
 	);
 };
