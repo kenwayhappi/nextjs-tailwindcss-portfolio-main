@@ -111,6 +111,7 @@ const About = () => {
 						<div className="flex flex-wrap gap-2">
 							{aiTools.map((tool) => (
 								<span
+
 									key={tool}
 									className="px-3 py-1 text-xs font-mono text-accent bg-accent/10 border border-accent/20 rounded-full"
 								>
@@ -155,7 +156,8 @@ const About = () => {
 							{a.skills.map((skill, index) => (
 								<motion.div
 									key={index}
-									custom={index * 0.5} variants={fadeUp}
+
+									custom={index * 0.1} variants={fadeUp}
 									className={`flex items-start gap-3 p-3 rounded-xl border ${skillColors[index]} bg-opacity-10 transition-all duration-300 hover:-translate-y-0.5`}
 								>
 									<div className={`flex-shrink-0 p-1.5 rounded-lg ${skillColors[index]} border`}>
