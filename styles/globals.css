@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,69 +8,68 @@
   html {
     scroll-behavior: smooth;
   }
-  body {
-    @apply bg-dark-950 text-slate-300 font-sans antialiased overflow-x-hidden;
-    /* Obsidian dark developer background */
-  }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply text-white font-bold tracking-tight;
+  body {
+    @apply bg-slate-50 dark:bg-dark-950 text-slate-800 dark:text-slate-300 font-sans antialiased overflow-x-hidden transition-colors duration-500;
   }
 }
 
 @layer utilities {
   .bg-grid-pattern {
     background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  }
+
+  .dark .bg-grid-pattern {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
   
   .bg-dot-pattern {
     background-size: 24px 24px;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+  }
+
+  .dark .bg-dot-pattern {
     background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   }
 
   .glass {
-    @apply bg-dark-900/60 backdrop-blur-xl border border-white/5;
+    @apply bg-white/80 dark:bg-dark-900/60 backdrop-blur-xl border border-slate-200 dark:border-white/10;
   }
   
   .glass-card {
-    @apply bg-dark-900/40 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl transition-all duration-500 hover:shadow-accent/10 hover:border-accent/30 hover:bg-dark-900/60;
+    @apply bg-white dark:bg-dark-900/50 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-2xl shadow-md dark:shadow-xl transition-all duration-300;
   }
 
-  .glass-card-neon {
-    @apply bg-dark-900/50 backdrop-blur-xl border border-primary-500/10 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-primary-500/15 hover:border-primary-500/40;
+  .glass-card:hover {
+    border-color: rgba(0, 245, 255, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(0, 245, 255, 0.15);
   }
-  
+
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-accent to-violetAccent;
-  }
-  
-  .text-gradient-subtle {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-400;
-  }
-
-  .text-glow-accent {
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.4), 0 0 20px rgba(0, 245, 255, 0.2);
-  }
-
-  .text-glow-primary {
-    text-shadow: 0 0 10px rgba(99, 102, 241, 0.4), 0 0 20px rgba(99, 102, 241, 0.2);
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-accent to-violetAccent dark:from-primary-400 dark:via-accent dark:to-violetAccent;
   }
 }
 
-/* Custom Scrollbar for a premium feel */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #030712; 
+  background: #f1f5f9;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #030712;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b; 
+  background: #cbd5e1;
   border-radius: 4px;
 }
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
 ::-webkit-scrollbar-thumb:hover {
-  background: #4f46e5; 
+  background: #4f46e5;
 }

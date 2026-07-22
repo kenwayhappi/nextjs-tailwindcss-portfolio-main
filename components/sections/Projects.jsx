@@ -1,59 +1,73 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Code, Terminal } from 'lucide-react';
+import { X, ExternalLink, Code, Terminal, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-// Static project metadata (same for both languages)
 const projectsMeta = [
 	{
+		id: 'smartcollect',
+		category: 'Mobile & API',
+		color: '#10b981',
+		gradient: 'from-emerald-600/30 via-teal-800/20 to-dark-950',
+		link: null,
+		featured: true,
+		tech: ['Laravel 12 (REST API)', 'Expo React Native', 'MySQL', 'Leaflet.js', 'GPS Geolocation'],
+	},
+	{
 		id: 'almanac',
-		category: 'Laravel',
+		category: 'Fullstack Web',
 		color: '#3b82f6',
-		gradient: 'from-blue-600/30 to-blue-900/10',
-		link: 'https://aw-cameroon.com',
-		tech: ['Laravel', 'MySQL', 'PHP', 'Blade', 'Bootstrap'],
+		gradient: 'from-blue-600/30 via-indigo-800/20 to-dark-950',
+		link: null,
+		featured: false,
+		tech: ['Laravel', 'MySQL', 'PHP', 'SI Architecture', 'Blade'],
 	},
 	{
 		id: 'laravel-voting',
-		category: 'Laravel',
-		color: '#10b981',
-		gradient: 'from-emerald-600/30 to-emerald-900/10',
+		category: 'Fullstack Web',
+		color: '#6366f1',
+		gradient: 'from-indigo-600/30 via-purple-800/20 to-dark-950',
 		link: null,
-		tech: ['Laravel', 'Sanctum', 'MySQL', 'Tailwind CSS', 'Artisan Tasks'],
+		featured: false,
+		tech: ['Laravel Sanctum', 'MySQL', 'Audit Anti-Fraude', 'PDF Reports'],
 	},
 	{
 		id: 'r-shiny',
-		category: 'R/Shiny',
+		category: 'Data Analytics',
 		color: '#a855f7',
-		gradient: 'from-purple-600/30 to-purple-900/10',
+		gradient: 'from-purple-600/30 via-violet-800/20 to-dark-950',
 		link: 'https://kenwaydev.shinyapps.io/ACM-teste/',
-		tech: ['R', 'R Shiny', 'ggplot2', 'Data Analysis', 'Cloud Deploy'],
+		featured: false,
+		tech: ['R Language', 'R Shiny', 'ggplot2', 'Cloud Deploy'],
 	},
 	{
 		id: 'defgi',
 		category: 'WordPress',
 		color: '#f97316',
-		gradient: 'from-orange-600/30 to-orange-900/10',
+		gradient: 'from-orange-600/30 via-amber-800/20 to-dark-950',
 		link: 'https://defgi.org/',
-		tech: ['WordPress', 'Elementor', 'SEO', 'Responsive', 'Yoast'],
+		featured: false,
+		tech: ['WordPress', 'Elementor', 'SEO Tuning', 'Responsive'],
 	},
 	{
 		id: 'awatechno',
 		category: 'WordPress',
 		color: '#0ea5e9',
-		gradient: 'from-sky-600/30 to-sky-900/10',
+		gradient: 'from-sky-600/30 via-cyan-800/20 to-dark-950',
 		link: 'https://awatechno.com/',
-		tech: ['WordPress', 'Elementor', 'Web Design', 'Performance', 'Hébergement'],
+		featured: false,
+		tech: ['Next.js', 'WordPress API', 'TailwindCSS', 'Web Design'],
 	},
 ];
 
 const categoryColors = {
-	Laravel: 'text-red-400 bg-red-500/10 border-red-500/20',
-	WordPress: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
-	'R/Shiny': 'text-violetAccent bg-violetAccent/10 border-violetAccent/20',
+	'Mobile & API': 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/30',
+	'Fullstack Web': 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/30',
+	'Data Analytics': 'text-purple-600 dark:text-violetAccent bg-purple-50 dark:bg-violetAccent/10 border-purple-200 dark:border-violetAccent/30',
+	WordPress: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/30',
 };
 
-const filterCategories = ['Laravel', 'WordPress', 'R/Shiny'];
+const filterCategories = ['Mobile & API', 'Fullstack Web', 'Data Analytics', 'WordPress'];
 
 const ProjectCard = ({ project, onClick, index }) => (
 	<motion.div
@@ -61,52 +75,62 @@ const ProjectCard = ({ project, onClick, index }) => (
 		whileInView={{ opacity: 1, y: 0 }}
 		viewport={{ once: true }}
 		transition={{ delay: index * 0.08, duration: 0.5 }}
-		className="glass-card flex flex-col h-full cursor-pointer group overflow-hidden"
+		className={`glass-card flex flex-col h-full cursor-pointer group overflow-hidden bg-white dark:bg-dark-900/60 border border-slate-200 dark:border-white/10 shadow-md transition-all duration-300 hover:-translate-y-1 ${
+			project.featured ? 'md:col-span-2 border-accent/40 shadow-xl shadow-accent/5' : ''
+		}`}
 		onClick={() => onClick(project)}
 		role="button"
 		tabIndex={0}
 		onKeyDown={(e) => e.key === 'Enter' && onClick(project)}
 	>
-		{/* IDE-style header bar */}
-		<div className={`flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-gradient-to-r ${project.gradient}`}>
+		{/* Terminal header */}
+		<div className={`flex items-center gap-2 px-4 py-3 border-b border-slate-200 dark:border-white/10 bg-slate-900 dark:bg-dark-950 text-white`}>
 			<span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
 			<span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
 			<span className="w-2.5 h-2.5 rounded-full bg-terminalGreen/80"></span>
-			<span className="ml-2 text-xs font-mono text-slate-400 truncate flex-1">{project.id}.js</span>
-			<Terminal className="w-3.5 h-3.5 text-slate-500" />
+			<span className="ml-2 text-xs font-mono text-slate-300 truncate flex-1 font-bold">
+				{project.id}.app
+			</span>
+			{project.isLocal && (
+				<span className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent/20 text-accent font-bold">
+					Local
+				</span>
+			)}
+			<Terminal className="w-3.5 h-3.5 text-slate-400" />
 		</div>
 
-		{/* Content */}
-		<div className="p-5 flex-1 flex flex-col">
-			<div className="flex items-start justify-between gap-2 mb-3">
-				<h3 className="text-white font-bold text-sm leading-snug group-hover:text-accent transition-colors duration-300">
-					{project.title}
-				</h3>
-				<span className={`flex-shrink-0 px-2 py-0.5 text-[10px] font-mono rounded-full border ${categoryColors[project.category] || 'text-slate-400 bg-slate-800 border-slate-700'}`}>
-					{project.category}
-				</span>
-			</div>
-
-			<p className="text-slate-500 text-xs leading-relaxed flex-1 mb-4">{project.summary}</p>
-
-			<div className="flex flex-wrap gap-1.5 mb-4">
-				{project.tech.slice(0, 3).map((t, i) => (
-					<span key={i} className="text-[10px] px-2 py-0.5 bg-dark-800 text-slate-400 rounded-md border border-white/5 font-mono">
-						{t}
+		{/* Content Body */}
+		<div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+			<div>
+				<div className="flex items-start justify-between gap-2 mb-2">
+					<h3 className="text-slate-900 dark:text-white font-bold text-base sm:text-lg leading-snug group-hover:text-primary-600 dark:group-hover:text-accent transition-colors duration-300">
+						{project.title}
+					</h3>
+					<span className={`flex-shrink-0 px-2.5 py-0.5 text-[10px] font-mono font-bold rounded-full border ${categoryColors[project.category] || ''}`}>
+						{project.category}
 					</span>
-				))}
-				{project.tech.length > 3 && (
-					<span className="text-[10px] px-2 py-0.5 bg-dark-800 text-slate-500 rounded-md border border-white/5 font-mono">
-						+{project.tech.length - 3}
-					</span>
+				</div>
+				{project.subtitle && (
+					<p className="text-xs font-mono text-primary-600 dark:text-primary-400 font-semibold mb-2">{project.subtitle}</p>
 				)}
+				<p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">{project.summary}</p>
 			</div>
 
-			<div className="flex justify-between items-center pt-3 border-t border-white/5">
-				<span className="text-primary-400 text-xs font-semibold group-hover:text-accent transition-colors duration-300">
-					{project.viewDetails}
-				</span>
-				<Code className="w-4 h-4 text-slate-600 group-hover:text-primary-400 transition-colors duration-300" />
+			<div>
+				<div className="flex flex-wrap gap-1.5 mb-4">
+					{project.tech.map((t, i) => (
+						<span key={i} className="text-[10px] sm:text-xs px-2.5 py-1 bg-slate-100 dark:bg-dark-800 text-slate-700 dark:text-slate-300 rounded-md border border-slate-200 dark:border-white/10 font-mono font-medium">
+							{t}
+						</span>
+					))}
+				</div>
+
+				<div className="flex justify-between items-center pt-3 border-t border-slate-200 dark:border-white/10">
+					<span className="text-primary-600 dark:text-accent text-xs font-mono font-bold group-hover:underline">
+						{project.viewDetails}
+					</span>
+					<Code className="w-4 h-4 text-slate-500 group-hover:text-accent transition-colors duration-300" />
+				</div>
 			</div>
 		</div>
 	</motion.div>
@@ -142,7 +166,6 @@ const Projects = () => {
 		};
 	}, [isOpen]);
 
-	// Merge meta (static) with translated text
 	const projects = projectsMeta.map((meta) => {
 		const translated = p.data.find((d) => d.id === meta.id) || {};
 		return { ...meta, ...translated, viewDetails: p.viewDetails };
@@ -164,21 +187,20 @@ const Projects = () => {
 			>
 				{/* Section Header */}
 				<div className="mb-10 text-center lg:text-left">
-					<p className="font-mono text-accent text-sm mb-3 tracking-widest">{p.sectionNum}</p>
-					<h2 className="text-4xl md:text-5xl font-bold text-white">
+					<p className="font-mono text-accent text-sm mb-2 tracking-widest">{p.sectionNum}</p>
+					<h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
 						{p.title} <span className="text-gradient">{p.titleHighlight}</span>
 					</h2>
 				</div>
 
 				{/* Filter tabs */}
 				<div className="flex flex-wrap gap-2 mb-10">
-					{/* "All" button */}
 					<button
 						onClick={() => setActiveFilter('ALL')}
-						className={`px-4 py-2 rounded-xl text-sm font-medium font-mono transition-all duration-300 border ${
+						className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-mono transition-all duration-300 border ${
 							activeFilter === 'ALL'
-								? 'bg-primary-600/30 border-primary-500/50 text-primary-300'
-								: 'bg-dark-800/40 border-white/5 text-slate-500 hover:text-slate-300 hover:border-white/10'
+								? 'bg-primary-600 text-white border-primary-600'
+								: 'bg-white dark:bg-dark-800/40 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white'
 						}`}
 					>
 						{p.filterAll}
@@ -187,10 +209,10 @@ const Projects = () => {
 						<button
 							key={cat}
 							onClick={() => setActiveFilter(cat)}
-							className={`px-4 py-2 rounded-xl text-sm font-medium font-mono transition-all duration-300 border ${
+							className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-mono transition-all duration-300 border ${
 								activeFilter === cat
-									? 'bg-primary-600/30 border-primary-500/50 text-primary-300'
-									: 'bg-dark-800/40 border-white/5 text-slate-500 hover:text-slate-300 hover:border-white/10'
+									? 'bg-primary-600 text-white border-primary-600'
+									: 'bg-white dark:bg-dark-800/40 border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white'
 							}`}
 						>
 							{cat}
@@ -198,8 +220,8 @@ const Projects = () => {
 					))}
 				</div>
 
-				{/* Grid */}
-				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+				{/* Projects Grid */}
+				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 					{filteredProjects.map((project, index) => (
 						<ProjectCard
 							key={project.id}
@@ -211,7 +233,7 @@ const Projects = () => {
 				</div>
 			</motion.div>
 
-			{/* Modal */}
+			{/* Project Technical Sheet Modal */}
 			<AnimatePresence>
 				{isOpen && displayedProject && (
 					<motion.div
@@ -220,7 +242,7 @@ const Projects = () => {
 						exit={{ opacity: 0, pointerEvents: 'none' }}
 						transition={{ duration: 0.15 }}
 						style={isOpen ? {} : { pointerEvents: 'none' }}
-						className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-dark-950/85 backdrop-blur-md"
+						className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 dark:bg-dark-950/85 backdrop-blur-md"
 						onClick={closeModal}
 					>
 						<motion.div
@@ -229,62 +251,91 @@ const Projects = () => {
 							exit={{ scale: 0.94, opacity: 0, y: 10 }}
 							transition={{ duration: 0.2, ease: 'easeOut' }}
 							onClick={(e) => e.stopPropagation()}
-							className="bg-dark-900 border border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+							className="bg-white dark:bg-dark-900 border border-slate-200 dark:border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
 						>
-							{/* Modal header */}
-							<div className={`flex items-center gap-2 px-5 py-4 border-b border-white/5 bg-gradient-to-r ${displayedProject.gradient}`}>
+							{/* Modal Header */}
+							<div className="flex items-center gap-2 px-5 py-4 border-b border-slate-200 dark:border-white/10 bg-slate-900 text-white">
 								<button
 									onClick={closeModal}
-									className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-400 transition-colors group"
+									className="w-3.5 h-3.5 rounded-full bg-red-500/80 hover:bg-red-400 transition-colors flex items-center justify-center"
 									aria-label="Fermer"
 								>
-									<span className="hidden group-hover:block">
-										<X size={8} className="text-red-900 mx-auto" />
-									</span>
+									<X size={10} className="text-black" />
 								</button>
-								<span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-								<span className="w-3 h-3 rounded-full bg-terminalGreen/80"></span>
-								<span className="ml-4 text-xs font-mono text-slate-300">{displayedProject.id}.js</span>
+								<span className="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></span>
+								<span className="w-3.5 h-3.5 rounded-full bg-terminalGreen/80"></span>
+								<span className="ml-4 text-xs font-mono font-bold text-slate-300">
+									{displayedProject.id}.spec
+								</span>
 							</div>
 
-							{/* Modal body */}
-							<div className="p-6 md:p-7 overflow-y-auto flex flex-col gap-5">
+							{/* Modal Body */}
+							<div className="p-6 md:p-8 overflow-y-auto flex flex-col gap-5">
 								<div>
-									<h3 className="text-xl md:text-2xl font-bold text-white mb-2">{displayedProject.title}</h3>
-									<span className={`inline-block px-3 py-1 text-xs font-mono rounded-full border ${categoryColors[displayedProject.category] || ''}`}>
+									<h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-1">{displayedProject.title}</h3>
+									{displayedProject.subtitle && (
+										<p className="text-sm font-mono text-primary-600 dark:text-primary-400 font-semibold mb-3">{displayedProject.subtitle}</p>
+									)}
+									<span className={`inline-block px-3 py-1 text-xs font-mono font-bold rounded-full border ${categoryColors[displayedProject.category] || ''}`}>
 										{displayedProject.category}
 									</span>
 								</div>
 
+								{/* Tech Tags */}
 								<div className="flex flex-wrap gap-2">
 									{displayedProject.tech.map((tech, idx) => (
-										<span key={idx} className="px-3 py-1 bg-primary-600/10 text-primary-300 text-xs rounded-full font-mono border border-primary-500/20">
+										<span key={idx} className="px-3 py-1 bg-primary-50 dark:bg-primary-600/10 text-primary-700 dark:text-primary-300 text-xs rounded-full font-mono font-bold border border-primary-200 dark:border-primary-500/20">
 											{tech}
 										</span>
 									))}
 								</div>
 
-								<p className="text-slate-400 leading-relaxed text-sm">{displayedProject.description}</p>
+								{/* Status Alert Badge */}
+								{displayedProject.isLocal ? (
+									<div className="p-3.5 rounded-xl bg-amber-50 dark:bg-accent/10 border border-amber-200 dark:border-accent/30 flex items-start gap-3">
+										<ShieldCheck className="w-5 h-5 text-amber-600 dark:text-accent flex-shrink-0 mt-0.5" />
+										<p className="text-xs font-mono text-slate-800 dark:text-slate-200 leading-relaxed">
+											<strong className="text-amber-600 dark:text-accent">Projet Local (Démo sur demande) :</strong> Démonstration interactive en direct disponible sur demande.
+										</p>
+									</div>
+								) : (
+									<div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-terminalGreen/10 border border-emerald-200 dark:border-terminalGreen/30 flex items-start gap-3">
+										<CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-terminalGreen flex-shrink-0 mt-0.5" />
+										<p className="text-xs font-mono text-slate-800 dark:text-slate-200 leading-relaxed">
+											<strong className="text-emerald-600 dark:text-terminalGreen">Projet en Ligne :</strong> Application accessible au public.
+										</p>
+									</div>
+								)}
 
-								<div className="flex flex-wrap items-center gap-3 mt-2">
-									{displayedProject.link ? (
+								{/* Description */}
+								<p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm">{displayedProject.description}</p>
+
+								{/* Actions */}
+								<div className="flex flex-wrap items-center gap-3 pt-3 border-t border-slate-200 dark:border-white/10">
+									{displayedProject.link && displayedProject.link !== '#' ? (
 										<a
 											href={displayedProject.link}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="flex items-center gap-2 px-6 py-2.5 bg-primary-600 hover:bg-primary-500 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-primary-500/30 text-sm"
+											className="flex items-center gap-2 px-6 py-2.5 bg-primary-600 hover:bg-primary-500 text-white font-semibold rounded-xl transition-all shadow-md text-sm"
 										>
 											{p.visitProject}
 											<ExternalLink size={15} />
 										</a>
 									) : (
-										<span className="px-6 py-2.5 bg-dark-800 text-slate-500 font-medium rounded-xl text-sm border border-white/5">
-											{p.localProject}
-										</span>
+										<a
+											href="https://wa.me/237697486059?text=Bonjour%20Happi,%20j'aimerais%20une%20démonstration%20en%20direct%20de%20votre%20projet%20"
+											target="_blank"
+											rel="noopener noreferrer"
+											className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition-all shadow-md text-sm"
+										>
+											Demander une Démo Directe
+											<ExternalLink size={15} />
+										</a>
 									)}
 									<button
 										onClick={closeModal}
-										className="px-6 py-2.5 text-slate-400 hover:text-white font-medium rounded-xl hover:bg-white/5 transition-all text-sm"
+										className="px-6 py-2.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 transition-all text-sm ml-auto"
 									>
 										{p.close}
 									</button>
