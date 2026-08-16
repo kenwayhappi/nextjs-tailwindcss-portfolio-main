@@ -60,7 +60,8 @@ const translations = {
       experienceTitle: 'Expérience',
       currentBadge: '● Actuel',
       education: [
-        { degree: 'Master 1 — Génie Logiciel', school: 'École Nationale Supérieure Polytechnique de Douala', location: 'Douala', year: '2025 — Présent', tags: ['Génie Logiciel', 'Architecture', 'R&D'] },
+        { degree: 'Master 2 — Génie Logiciel', school: 'École Nationale Supérieure Polytechnique de Douala', location: 'Douala', year: '2026 — Présent', tags: ['Génie Logiciel', 'Architecture', 'R&D'] },
+        { degree: 'Master 1 — Génie Logiciel (Validé)', school: 'École Nationale Supérieure Polytechnique de Douala', location: 'Douala', year: '2025 — 2026', tags: ['Validé', 'Génie Logiciel'] },
         { degree: "Diplôme d'Ingénieur en Informatique", school: "Institut Africain d'Informatique (IAI)", location: 'Douala', year: '2021 — 2024', tags: ['Ingénierie', 'Systèmes'] },
         { degree: 'Licence en Informatique', school: "Institut Africain d'Informatique (IAI)", location: 'Douala', year: '2021 — 2024', tags: ['Développement', 'Bases de Données'] },
         { degree: 'Baccalauréat Série TI', school: 'Lycée Joss', location: 'Douala', year: '2021', tags: ['Informatique'] },
@@ -281,7 +282,8 @@ const translations = {
       experienceTitle: 'Experience',
       currentBadge: '● Current',
       education: [
-        { degree: "Master's 1 — Software Engineering", school: 'National Advanced School of Engineering of Douala (Polytechnique)', location: 'Douala', year: '2025 — Present', tags: ['Software Eng.', 'Architecture'] },
+        { degree: "Master's 2 — Software Engineering", school: 'National Advanced School of Engineering of Douala (Polytechnique)', location: 'Douala', year: '2026 — Present', tags: ['Software Eng.', 'Architecture'] },
+        { degree: "Master's 1 — Software Engineering (Passed)", school: 'National Advanced School of Engineering of Douala (Polytechnique)', location: 'Douala', year: '2025 — 2026', tags: ['Passed', 'Software Eng.'] },
         { degree: 'Computer Engineering Degree', school: 'African Institute of Computer Science (IAI)', location: 'Douala', year: '2021 — 2024', tags: ['Engineering', 'Systems'] },
         { degree: "Bachelor's Degree in Computer Science", school: 'African Institute of Computer Science (IAI)', location: 'Douala', year: '2021 — 2024', tags: ['Web/Mobile Dev'] },
         { degree: 'High School Diploma (Series TI)', school: 'Lycée Joss', location: 'Douala', year: '2021', tags: ['IT'] },
