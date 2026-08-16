@@ -9,16 +9,16 @@ const contactInfo = [
 		key: 'whatsapp',
 		icon: <FaWhatsapp size={20} />,
 		label: 'WhatsApp Direct',
-		value: '(+237) 697-48-60-59',
-		href: 'https://wa.me/237697486059',
+		value: '(+237) 673-56-32-69',
+		href: 'https://wa.me/237673563269',
 		color: 'text-terminalGreen bg-terminalGreen/10 border-terminalGreen/30',
 	},
 	{
 		key: 'phone',
 		icon: <Phone size={18} />,
-		label: 'Téléphone',
-		value: '(+237) 654-19-01-93',
-		href: 'tel:+237654190193',
+		label: 'Appels & SMS',
+		value: '(+237) 697-48-60-59',
+		href: 'tel:+237697486059',
 		color: 'text-primary-500 bg-primary-500/10 border-primary-500/30',
 	},
 	{
@@ -55,7 +55,7 @@ const Contact = () => {
 		e.preventDefault();
 		setIsSubmitting(true);
 		const { name, email, message } = formData;
-		const waNumber = '237697486059';
+		const waNumber = '237673563269';
 		const waText = c.waMessage(name, email, message);
 		window.open('https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waText), '_blank');
 		setTimeout(() => setIsSubmitting(false), 1500);
@@ -130,7 +130,7 @@ const Contact = () => {
 
 						{/* WhatsApp direct CTA */}
 						<a
-							href="https://wa.me/237697486059"
+							href="https://wa.me/237673563269"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="flex items-center justify-center gap-3 px-6 py-4 bg-emerald-600 dark:bg-terminalGreen/10 hover:bg-emerald-500 dark:hover:bg-terminalGreen/20 border border-emerald-600 dark:border-terminalGreen/30 text-white dark:text-terminalGreen font-bold rounded-xl transition-all duration-300 group shadow-lg"

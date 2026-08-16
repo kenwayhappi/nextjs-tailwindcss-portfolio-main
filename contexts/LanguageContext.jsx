@@ -127,17 +127,31 @@ const translations = {
           subtitle: 'Plateforme Web & App Mobile (Mairie de Douala)',
           isLocal: true,
           tags: ['Laravel 12 API', 'Expo React Native', 'MySQL', 'Leaflet.js'],
+          images: ['/images/mobile-project-1.jpg', '/images/mobile-project-2.jpg'],
           summary: 'Gestion intelligente des déchets urbains : signalement GPS citoyen en temps réel, itinéraire chauffeur optimisé et tableau de bord Mairie.', 
           description: "SmartCollect permet la gestion en temps réel de la salubrité urbaine à Douala. Les citoyens signalent les dépôts sauvages avec photo et GPS via l'application mobile React Native, les chauffeurs de camions benne visualisent les points de collecte optimisés sur carte interactive, et la Mairie de Douala suit les statistiques via un dashboard Leaflet.js. Inclut un système de réputation anti-spam et l'exportation de rapports PDF." 
         },
         { 
           id: 'almanac', 
           title: 'Almanac Cameroun', 
-          subtitle: 'Système d\'Information Administratif',
-          isLocal: true,
-          tags: ['Laravel', 'MySQL', 'Blade'],
-          summary: 'Centralisation et structuration des villages, groupements et autorités traditionnelles du Cameroun.', 
-          description: "Application web développée pour numériser la cartographie administrative du Cameroun (villages, cantons et chefferies). Remplace les registres papier dispersés par un système digital fiable et interrogeable." 
+          subtitle: 'Système d\'Information Administratif & Cartographie',
+          isLocal: false,
+          liveUrl: 'https://almanac-4yt5.onrender.com/',
+          tags: ['Laravel 11', 'PostgreSQL', 'Docker', 'Nginx', 'Supervisord'],
+          images: ['/ac.png', '/DAS.png'],
+          summary: 'Plateforme numérique centralisée de préservation, valorisation, cartographie et généalogie des chefferies et villages du Cameroun.', 
+          description: "Plateforme web d'Information Administrative numérisant la cartographie du Cameroun (villages, cantons, groupements et chefferies traditionnelles). Déployée en production sur Render Cloud avec conteneurisation Docker (Nginx, Supervisord, PHP-FPM) et base de données PostgreSQL. Développée dans le cadre du stage de Master 1 GL à VRN Innovation." 
+        },
+        { 
+          id: 'slz', 
+          title: 'SLZ Platform', 
+          subtitle: 'Plateforme Web Sur-Mesure & Dashboard',
+          isLocal: false,
+          liveUrl: 'https://slz-seven.vercel.app/',
+          tags: ['Next.js', 'React', 'TailwindCSS', 'Vercel Cloud'],
+          images: ['/ac1.png', '/dash1.png'],
+          summary: 'Application web moderne et dynamique hébergée sur Vercel avec espace client et tableau de bord d\'administration.', 
+          description: "Solution web haute performance déployée en production sur Vercel. Propose une interface utilisateur fluide, réactive et élégante (Page d'accueil ac1.png) couplée à un tableau de bord d'administration analytique complet (Dashboard dash1.png)." 
         },
         { 
           id: 'laravel-voting', 
@@ -145,6 +159,7 @@ const translations = {
           subtitle: 'Scrutin Sécurisé & Audit Anti-Fraude',
           isLocal: true,
           tags: ['Laravel Sanctum', 'MySQL', 'PV PDF'],
+          images: ['/images/web-project-1.jpg'],
           summary: 'Plateforme de vote en ligne sécurisée avec rôles, détection des fraudes et Procès-Verbaux PDF.', 
           description: "Plateforme d'élection sécurisée sous Laravel Sanctum. Vote à bulletin secret, gestion des ex-aequo avec second tour automatique, journal d'audit anti-fraude en temps réel et éditeur de PV officiels au format PDF." 
         },
@@ -155,6 +170,7 @@ const translations = {
           isLocal: false,
           liveUrl: 'https://kenwaydev.shinyapps.io/ACM-teste/',
           tags: ['R', 'R Shiny', 'ggplot2'],
+          images: ['/images/web-project-2.jpg'],
           summary: 'Tableau de bord interactif d\'analyse des habitudes d\'utilisation des smartphones.', 
           description: "Application d'analyse statistique développée en langage R. Visualisation dynamique et tableaux récapitulatifs pour explorer des jeux de données comportementales. Déployé sur shinyapps.io." 
         },
@@ -165,6 +181,7 @@ const translations = {
           isLocal: false,
           liveUrl: 'https://defgi.org/',
           tags: ['WordPress', 'Elementor', 'SEO'],
+          images: ['/images/ui-project-1.jpg'],
           summary: 'Site vitrine professionnel pour optimiser la visibilité et l\'image de marque de Defgi.', 
           description: "Création d'un site vitrine responsive et optimisé pour le référencement naturel (SEO) présentant les activités et valeurs de la société Defgi." 
         },
@@ -175,6 +192,7 @@ const translations = {
           isLocal: false,
           liveUrl: 'https://awatechno.com/',
           tags: ['Next.js', 'WordPress API', 'TailwindCSS'],
+          images: ['/images/ui-project-2.jpg'],
           summary: 'Vitrine web moderne pour l\'agence Awatechno à Douala.', 
           description: "Développement d'une interface claire et moderne présentant les services d'accompagnement tech et de transformation digitale d'Awatechno." 
         },
@@ -330,17 +348,31 @@ const translations = {
           subtitle: 'Web & Mobile App (Douala City Council)',
           isLocal: true,
           tags: ['Laravel 12 API', 'Expo React Native', 'MySQL', 'Leaflet.js'],
+          images: ['/images/mobile-project-1.jpg', '/images/mobile-project-2.jpg'],
           summary: 'Smart waste management: real-time citizen GPS reporting, driver route optimization, and City Council admin dashboard.', 
           description: "SmartCollect optimizes urban sanitation in Douala. Citizens report waste dumps with photos & GPS via the React Native mobile app, truck drivers follow optimized routes on interactive maps, and city administrators track metrics via a Leaflet.js dashboard. Includes anti-spam reputation rules and PDF report export." 
         },
         { 
           id: 'almanac', 
           title: 'Almanac Cameroon', 
-          subtitle: 'Administrative Information System',
-          isLocal: true,
-          tags: ['Laravel', 'MySQL', 'Blade'],
-          summary: 'Centralization of villages, groupings, and traditional authorities in Cameroon.', 
-          description: "Web application designed to digitize Cameroon's administrative map (villages, chiefdoms). Replaces paper records with a reliable, searchable digital system." 
+          subtitle: 'Administrative Information System & Mapping',
+          isLocal: false,
+          liveUrl: 'https://almanac-4yt5.onrender.com/',
+          tags: ['Laravel 11', 'PostgreSQL', 'Docker', 'Nginx', 'Supervisord'],
+          images: ['/ac.png', '/DAS.png'],
+          summary: 'Centralized digital platform for preservation, mapping, and genealogy of Cameroon chiefdoms and villages.', 
+          description: "Web platform designed to digitize Cameroon's administrative map (villages, chiefdoms). Deployed live on Render Cloud with Docker containerization (Nginx, Supervisord, PHP-FPM) and PostgreSQL database. Developed as part of Master 1 GL internship at VRN Innovation." 
+        },
+        { 
+          id: 'slz', 
+          title: 'SLZ Platform', 
+          subtitle: 'Custom Web Application & Dashboard',
+          isLocal: false,
+          liveUrl: 'https://slz-seven.vercel.app/',
+          tags: ['Next.js', 'React', 'TailwindCSS', 'Vercel Cloud'],
+          images: ['/ac1.png', '/dash1.png'],
+          summary: 'Modern web app hosted on Vercel with responsive interface and admin dashboard.', 
+          description: "High-performance web solution deployed live on Vercel. Features a sleek, responsive user interface (Homepage ac1.png) paired with a comprehensive analytics admin panel (Dashboard dash1.png)." 
         },
         { 
           id: 'laravel-voting', 
@@ -348,8 +380,8 @@ const translations = {
           subtitle: 'Secure Voting & Anti-Fraud Audit',
           isLocal: true,
           tags: ['Laravel Sanctum', 'MySQL', 'PDF Reports'],
-          summary: 'Secure online voting platform featuring roles, fraud detection, and PDF minutes.', 
-          description: "Secure election platform built with Laravel Sanctum. Secret ballot voting, automatic runoff handling, real-time anti-fraud audit log, and PDF minutes generation." 
+          images: ['/images/web-project-1.jpg'],
+          summary: 'Secure election platform built with Laravel Sanctum. Secret ballot voting, automatic runoff handling, real-time anti-fraud audit log, and PDF minutes generation.' 
         },
         { 
           id: 'r-shiny', 
@@ -358,6 +390,7 @@ const translations = {
           isLocal: false,
           liveUrl: 'https://kenwaydev.shinyapps.io/ACM-teste/',
           tags: ['R', 'R Shiny', 'ggplot2'],
+          images: ['/images/web-project-2.jpg'],
           summary: 'Interactive dashboard for analyzing smartphone usage behavioral data.', 
           description: "Statistical data analysis app built in R. Dynamic visualization and summary tables for behavioral datasets. Deployed live on shinyapps.io." 
         },
@@ -368,6 +401,7 @@ const translations = {
           isLocal: false,
           liveUrl: 'https://defgi.org/',
           tags: ['WordPress', 'Elementor', 'SEO'],
+          images: ['/images/ui-project-1.jpg'],
           summary: 'Professional showcase website to enhance Defgi\'s online visibility.', 
           description: "Custom responsive corporate site optimized for search engine ranking (SEO) presenting Defgi's core services." 
         },
@@ -378,6 +412,7 @@ const translations = {
           isLocal: false,
           liveUrl: 'https://awatechno.com/',
           tags: ['Next.js', 'WordPress API', 'TailwindCSS'],
+          images: ['/images/ui-project-2.jpg'],
           summary: 'Modern web portal for Awatechno tech agency in Douala.', 
           description: "Development of a sleek, modern interface presenting tech services and digital offerings for Awatechno." 
         },

@@ -49,7 +49,7 @@ const AppFooter = () => {
 						<FaLinkedin size={18} className="group-hover:scale-110 transition-transform" />
 					</a>
 					<a
-						href="https://wa.me/237697486059"
+						href="https://wa.me/237673563269"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="p-2 text-slate-700 dark:text-slate-400 hover:text-terminalGreen hover:bg-terminalGreen/10 rounded-lg transition-all duration-300 group"

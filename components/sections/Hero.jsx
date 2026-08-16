@@ -165,7 +165,7 @@ const Hero = () => {
 							className="flex flex-wrap justify-center lg:justify-start gap-4 w-full"
 						>
 							<a
-								href="https://wa.me/237697486059"
+								href="https://wa.me/237673563269"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="group flex items-center gap-2.5 px-7 py-3.5 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-semibold rounded-xl transition-all duration-300 shadow-xl shadow-primary-500/25 hover:-translate-y-0.5"
