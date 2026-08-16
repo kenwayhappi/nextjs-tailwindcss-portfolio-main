@@ -110,12 +110,12 @@ const Hero = () => {
 	const h = t.hero;
 
 	return (
-		<section className="relative min-h-[88vh] flex items-center py-10 overflow-hidden">
+		<section className="relative min-h-[82vh] flex items-center py-4 sm:py-8 lg:py-10 overflow-hidden">
 			{/* 3D Three.js Background Canvas */}
 			<Hero3DCanvas />
 
 			<div className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+				<div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center">
 					{/* Left column — Bio & CTA */}
 					<motion.div
 						variants={containerVariants}
@@ -124,7 +124,7 @@ const Hero = () => {
 						className="flex flex-col items-center lg:items-start text-center lg:text-left"
 					>
 						{/* Status badge */}
-						<motion.div variants={itemVariants} className="mb-6">
+						<motion.div variants={itemVariants} className="mb-3 sm:mb-6">
 							<div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-terminalGreen/10 border border-terminalGreen/30 backdrop-blur-md">
 								<span className="w-2 h-2 rounded-full bg-terminalGreen animate-pulse"></span>
 								<span className="text-terminalGreen text-xs font-mono font-medium">{h.available}</span>
@@ -134,16 +134,16 @@ const Hero = () => {
 						{/* Name */}
 						<motion.h1
 							variants={itemVariants}
-							className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black tracking-tighter leading-none mb-4 text-slate-900 dark:text-white"
+							className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-black tracking-tighter leading-none mb-2 sm:mb-4 text-slate-900 dark:text-white"
 						>
-							Happi <br />
-							<span className="text-gradient">Mathis</span>
+							Happi <br className="hidden sm:inline" />
+							<span className="text-gradient font-black"> Mathis</span>
 						</motion.h1>
 
 						{/* Role Subtitle */}
 						<motion.p
 							variants={itemVariants}
-							className="text-base sm:text-xl text-slate-700 dark:text-slate-300 font-mono font-semibold mb-4"
+							className="text-sm sm:text-xl text-slate-700 dark:text-slate-300 font-mono font-semibold mb-2 sm:mb-4"
 						>
 							<span className="text-accent">{'<'}</span>
 							{' '}{h.role}{' '}
@@ -153,33 +153,33 @@ const Hero = () => {
 						{/* Description */}
 						<motion.p
 							variants={itemVariants}
-							className="text-sm sm:text-base text-slate-700 dark:text-slate-400 mb-8 max-w-lg leading-relaxed"
+							className="text-xs sm:text-base text-slate-700 dark:text-slate-400 mb-4 sm:mb-8 max-w-lg leading-relaxed"
 						>
 							<strong className="text-slate-900 dark:text-slate-200">{h.location}</strong>.{' '}
 							{h.description}
 						</motion.p>
 
-						{/* CTA Buttons */}
+						{/* CTA Buttons — 1 Single Row on Mobile */}
 						<motion.div
 							variants={itemVariants}
-							className="flex flex-wrap justify-center lg:justify-start gap-4 w-full"
+							className="flex flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-4 w-full max-w-md lg:max-w-none mb-5 lg:mb-0"
 						>
 							<a
 								href="https://wa.me/237673563269"
 								target="_blank"
 								rel="noopener noreferrer"
-								className="group flex items-center gap-2.5 px-7 py-3.5 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-semibold rounded-xl transition-all duration-300 shadow-xl shadow-primary-500/25 hover:-translate-y-0.5"
+								className="flex-1 lg:flex-initial flex items-center justify-center gap-1.5 sm:gap-2.5 px-3.5 sm:px-7 py-2.5 sm:py-3.5 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-primary-500/25 hover:-translate-y-0.5 text-xs sm:text-base whitespace-nowrap group"
 							>
-								<FaWhatsapp size={20} className="text-emerald-300" />
+								<FaWhatsapp className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300 flex-shrink-0" />
 								<span>{h.contactBtn}</span>
-								<ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+								<ArrowRight className="w-3.5 h-3.5 hidden sm:inline-block group-hover:translate-x-1 transition-transform" />
 							</a>
 							<a
 								href="/cv2026.pdf"
 								download
-								className="flex items-center gap-2.5 px-7 py-3.5 bg-white dark:bg-dark-900/60 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white font-semibold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-md"
+								className="flex-1 lg:flex-initial flex items-center justify-center gap-1.5 sm:gap-2.5 px-3.5 sm:px-7 py-2.5 sm:py-3.5 bg-white dark:bg-dark-900/60 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white font-semibold rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-md text-xs sm:text-base whitespace-nowrap"
 							>
-								<Download size={16} className="text-accent" />
+								<Download className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent flex-shrink-0" />
 								<span>{h.cvBtn}</span>
 							</a>
 						</motion.div>
@@ -195,13 +195,13 @@ const Hero = () => {
 						{/* Profile photo card */}
 						<div className="relative mx-auto lg:mx-0 w-fit">
 							<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-600/30 via-accent/20 to-violetAccent/20 blur-2xl scale-110 -z-10 animate-pulse-slow"></div>
-							<div className="relative w-56 h-56 md:w-64 md:h-64 rounded-3xl overflow-hidden border-2 border-accent/40 shadow-2xl group">
+							<div className="relative w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 rounded-3xl overflow-hidden border-2 border-accent/40 shadow-2xl group">
 								<Image
 									src="/profile.jpg"
 									alt="Happi Mathis — Fullstack Engineer"
 									fill
 									priority
-									sizes="(max-width: 768px) 224px, 256px"
+									sizes="(max-width: 768px) 208px, 256px"
 									className="object-cover transition-transform duration-700 group-hover:scale-105"
 								/>
 								<div className="absolute inset-0 bg-gradient-to-t from-dark-950/60 via-transparent to-transparent z-10"></div>
