@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Code, Terminal, CheckCircle2, ShieldCheck, Camera, Maximize2 } from 'lucide-react';
