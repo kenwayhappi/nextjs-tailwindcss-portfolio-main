@@ -7,8 +7,8 @@ const DefaultLayout = ({ children }) => {
 	return (
 		<>
 			<Head>
-				<title>Happi Mathis | Élève Ingénieur Génie Logiciel — Polytechnique Douala</title>
-				<meta name="description" content="Portfolio de Happi Mathis, Élève Ingénieur en Génie Logiciel (M1 - Polytechnique Douala) et Développeur Fullstack (Next.js, Expo React Native, Laravel 12, Flutter). Solutions logicielles haute performance." />
+				<title>Happi Mathis | Développeur Full Stack Freelance & Master 2 Génie Logiciel</title>
+				<meta name="description" content="Portfolio de Happi Mathis, Développeur Full Stack Freelance et Étudiant en Master 2 Génie Logiciel (Polytechnique Douala). Conception et développement de solutions web & mobiles modernes et performantes." />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
 			<div className="flex flex-col min-h-screen relative font-sans text-slate-800 dark:text-slate-300 bg-slate-50 dark:bg-dark-950 transition-colors duration-500 bg-dot-pattern">

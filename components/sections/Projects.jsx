@@ -6,6 +6,16 @@ import { useLanguage } from '../../contexts/LanguageContext';
 
 const projectsMeta = [
 	{
+		id: 'tcf-simulator',
+		category: 'Fullstack Web',
+		color: '#00f5ff',
+		gradient: 'from-cyan-600/30 via-blue-800/20 to-dark-950',
+		link: null,
+		featured: false,
+		tech: ['Next.js', 'React', 'Audio Engine', 'QCM & Chrono', 'TailwindCSS'],
+		images: ['/tcf.png'],
+	},
+	{
 		id: 'smartcollect',
 		category: 'Mobile & API',
 		color: '#10b981',
@@ -22,7 +32,7 @@ const projectsMeta = [
 		gradient: 'from-blue-600/30 via-indigo-800/20 to-dark-950',
 		link: 'https://almanac-4yt5.onrender.com/',
 		featured: false,
-		tech: ['Laravel 11', 'PostgreSQL', 'Docker', 'Nginx', 'Supervisord'],
+		tech: ['Laravel 11', 'PostgreSQL', 'Docker', 'Hostinger', 'Supervisord'],
 		images: ['/ac.png', '/DAS.png'],
 	},
 	{
@@ -89,6 +99,9 @@ const filterCategories = ['Mobile & API', 'Fullstack Web', 'Data Analytics', 'Wo
 const getImageLabel = (projectId, index) => {
 	if (projectId === 'almanac' || projectId === 'slz') {
 		return index === 0 ? "📸 Page d'accueil" : "📊 Dashboard Admin";
+	}
+	if (projectId === 'tcf-simulator') {
+		return "📸 Interface de Simulation TCF";
 	}
 	return `Aperçu ${index + 1}`;
 };
